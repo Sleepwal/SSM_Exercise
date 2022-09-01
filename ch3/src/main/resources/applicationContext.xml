@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 测试构造方法实例化Bean -->
+    <bean id="constructorInstance" class="instance.BeanClass"/>
+    <bean id="constructorInstance1" class="instance.BeanClass" scope="prototype"/>
+
+    <!-- 静态工厂实例化Bean -->
+    <bean id="staticFactoryInstance" class="instance.BeanStaticFactory" factory-method="createInstance"/>
+
+    <!-- 实例工厂实例化Bean -->
+<!--    <bean id="instanceFactoryInstance" factory-bean="BeanInstanceFactory" factory-method="createBeanClassInstance"/>-->
+
+    <bean id="beanLife" class="life.BeanLife" init-method="initMyself" destroy-method="destroyMyself"/>
+
+    <!-- 使用构造方法注入方式装配 -->
+    <bean id="user1" class="assemble.ComplexUser">
+        <constructor-arg index="0" value="张三1"/>
+        <constructor-arg index="1">
+            <list>
+                <value>唱歌</value>
+                <value>跳舞</value>
+                <value>爬山</value>
+            </list>
+        </constructor-arg>
+        <constructor-arg index="2">
+            <map>
+                <entry key="dalian" value="大连"/>
+                <entry key="beijing" value="北京"/>
+                <entry key="shanghai" value="上海"/>
+            </map>
+        </constructor-arg>
+        <constructor-arg index="3">
+            <set>
+                <value>张三100</value>
+                <value>张三101</value>
+                <value>张三102</value>
+            </set>
+        </constructor-arg>
+        <constructor-arg index="4">
+            <array>
+                <value>abc</value>
+                <value>efg</value>
+            </array>
+        </constructor-arg>
+    </bean>
+
+    <!-- 使用属性的setter方法注入装配 -->
+    <bean id="user2" class="assemble.ComplexUser">
+        <property name="username" value="张三2"/>
+        <property name="hobbyList">
+            <list>
+                <value>看书</value>
+                <value>学习</value>
+            </list>
+        </property>
+        <property name="residenceMap">
+            <map>
+                <entry key="shenzhen" value="深圳"/>
+                <entry key="guangzhou" value="广州"/>
+                <entry key="tianjin" value="天津"/>
+            </map>
+        </property>
+        <property name="aliasSet">
+            <set>
+                <value>张三103</value>
+                <value>张三104</value>
+                <value>张三105</value>
+            </set>
+        </property>
+        <property name="array">
+            <array>
+                <value>qwe</value>
+                <value>rty</value>
+            </array>
+        </property>
+    </bean>
+</beans>
