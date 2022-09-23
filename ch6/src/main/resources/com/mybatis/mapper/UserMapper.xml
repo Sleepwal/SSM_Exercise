@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE mapper
+                PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis.mapper.UserMapper">
+    <select id="selectUserById" parameterType="Integer"
+            resultType="com.mybatis.pojo.TUser">
+        select * from ssm.t_user where uid = #{uid}
+    </select>
+
+    <select id="selectAllUser" resultType="com.mybatis.pojo.TUser">
+        select * from ssm.t_user
+    </select>
+
+    <insert id="addUser" parameterType="com.mybatis.pojo.TUser">
+        insert into ssm.t_user(username, gender) values (#{username}, #{gender})
+    </insert>
+
+    <update id="updateUser" parameterType="com.mybatis.pojo.TUser">
+        update ssm.t_user set username = #{username}, gender = #{gender} where uid= #{uid}
+    </update>
+
+    <delete id="deleteUser" parameterType="Integer">
+        delete from ssm.t_user where uid= #{uid}
+    </delete>
+
+</mapper>
