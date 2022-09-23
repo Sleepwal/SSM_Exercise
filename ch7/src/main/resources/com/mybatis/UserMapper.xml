@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis.UserMapper">
+
+    <!-- 一对多 根据id查询用户及其关联的订单信息 -->
+    <!-- 1.嵌套查询 -->
+    <resultMap id="userAndOrders1" type="com.pojo.MyUser">
+        <id property="uid" column="uid"/>
+        <result property="username" column="username"/>
+        <result property="gender" column="gender"/>
+        <!-- ofType表示集合中的元素类型,将id传递给selectOrderById -->
+        <collection property="ordersList" ofType="com.pojo.Orders" column="uid"
+                    select="com.mybatis.OrdersMapper.selectOrdersById"/>
+    </resultMap>
+    <select id="selectUserOrdersById1" parameterType="Integer" resultMap="userAndOrders1">
+        select * from ssm.t_user where uid = #{uid}
+    </select>
+
+    <!-- 2.嵌套结果 -->
+    <resultMap id="userAndOrders2" type="com.pojo.MyUser">
+        <id property="uid" column="uid"/>
+        <result property="username" column="username"/>
+        <result property="gender" column="gender"/>
+        <!-- ofType表示集合中的元素类型 -->
+        <collection property="ordersList" ofType="com.pojo.Orders">
+            <id property="id" column="id"/>
+            <result property="ordersn" column="ordersn"/>
+            <result property="userId" column="user_id"/>
+        </collection>
+    </resultMap>
+    <select id="selectUserOrdersById2" parameterType="Integer" resultMap="userAndOrders2">
+        /*不能用select u.*, o.*, 必须用select u.*, o.id, o.ordersn*/
+        select u.*,o.id, o.ordersn
+        from ssm.t_user u, ssm.orders o
+        where u.uid = o.user_id and u.uid = #{uid}
+    </select>
+
+    <!-- 3.连接查询(使用POJO存储结果), 不用自定义Map -->
+    <select id="selectUserOrdersById3" parameterType="Integer" resultType="com.pojo.SelectUserOrdersById">
+        select u.*, o.id, o.ordersn
+        from ssm.t_user u, ssm.orders o
+        where u.uid = o.user_id and  u.uid = #{uid}
+    </select>
+
+
+
+    <!-- 根据id查询一个用户信息 -->
+    <select id="selectUserById" parameterType="Integer"
+            resultType="com.pojo.TUser">
+        select * from ssm.t_user where uid = #{id}
+    </select>
+
+    <!-- 查询姓?的?性 -->
+    <!--
+    <select id="selectUser" resultType="com.pojo.TUser" parameterType="map">
+        select * from ssm.t_user
+        where username like concat('%', #{username}, '%')
+          and gender=#{gender}
+    </select>
+    -->
+    <!-- sql语句,复用列名 -->
+    <sql id="comColumns">uid,username,gender</sql>
+    <!-- 查询姓?的?性 -->
+    <select id="selectUser" resultType="com.pojo.TUser" parameterType="com.pojo.SelectUserParam">
+        select <include refid="comColumns"/> from ssm.t_user
+        where username like concat('%', #{username}, '%')
+          and gender=#{gender}
+    </select>
+
+    <!-- 使用自定义结果集 -->
+    <resultMap id="myResult" type="com.pojo.TUser">
+        <!-- property是TUser类中的属性 -->
+        <!-- column是查询结果的列名, 可以来自不同的表 -->
+        <id property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="gender" column="gender"/>
+    </resultMap>
+
+    <!-- 查询所有用户,用Map存储 -->
+    <!--<select id="selectAllUserMap" resultType="map">
+        select * from ssm.t_user
+    </select> -->
+    <!-- 查询所有用户,用自定义结果集存储 -->
+    <select id="selectAllUserMap" resultMap="myResult">
+        select * from ssm.t_user
+    </select>
+
+    <insert id="insertUser" parameterType="com.pojo.TUser"
+            keyProperty="id" useGeneratedKeys="true">
+       <!-- <selectKey keyProperty="id" resultType="Integer" order="BEFORE">
+            select DECODE(max(id), null, 2, max(id)+1) as newId from ssm.t_user
+        </selectKey>-->
+        insert into ssm.t_user (username,gender) values (#{username}, #{gender})
+    </insert>
+
+    <!-- 修改一个用户 -->
+    <update id="updateUser" parameterType="com.pojo.TUser">
+        update ssm.t_user set username = #{username}, gender=#{gender} where uid = #{id}
+    </update>
+
+    <!-- 删除一个用户 -->
+    <delete id="deleteUser" parameterType="Integer">
+        delete from ssm.t_user where uid = #{id}
+    </delete>
+
+    <!--<sql id="comColumns">id,username,gender</sql>
+    <select id="select" resultType="com.pojo.TUser">
+        select <include refid="comColumns"/> from ssm.t_user
+    </select>-->
+
+    <!-- 自定义映射集 -->
+<!--
+    <resultMap id="" type="">
+        <constructor>&lt;!&ndash; 类再实例化时用来注入结果到构造方法 &ndash;&gt;
+            <idArg/>&lt;!&ndash; ID参数，结果为ID &ndash;&gt;
+            <arg/>&lt;!&ndash; 注入到构造方法的一个普通结果 &ndash;&gt;
+        </constructor>
+        <id/>&lt;!&ndash; 用于表示哪个列是主键 &ndash;&gt;
+        <result/>&lt;!&ndash; 注入到字段或JavaBean属性的普通结果 &ndash;&gt;
+        <association property=""/>&lt;!&ndash; 用于一对一关联 &ndash;&gt;
+        <collection property=""/>&lt;!&ndash; 用于一对多、多对多关联 &ndash;&gt;
+        <discriminator javaType="">&lt;!&ndash; 使用结果值来决定使用哪个结果映射 &ndash;&gt;
+            <case value=""/>&lt;!&ndash; 基于某些值的结果映射 &ndash;&gt;
+        </discriminator>
+    </resultMap>
+-->
+
+
+</mapper>

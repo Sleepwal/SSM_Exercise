@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- 使用MyBatis嵌套查询方式进行关联查询时,使用延迟加载可以提高查询效率 -->
+    <settings>
+        <!-- 打开延迟加载 -->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <!-- 将积极加载改为按需加载 -->
+        <setting name="aggressiveLazyLoading" value="false"/>
+    </settings>
+
+    <!--引入映射文件-->
+    <mappers>
+        <!--<mapper resource="com/mybatis/UserMapper.xml"/>-->
+        <package name="com.mybatis"/>
+    </mappers>
+
+    <!--设置连接数据库的环境-->
+    <!--<environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/ssm?serverTimezone=UTC"/>
+                <property name="username" value="root"/>
+                <property name="password" value="166"/>
+            </dataSource>
+        </environment>
+    </environments>-->
+</configuration>
