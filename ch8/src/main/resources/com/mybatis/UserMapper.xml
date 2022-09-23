@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis.UserMapper">
+    <!-- 根据id查询一个用户信息 -->
+    <select id="selectUserById" parameterType="Integer"
+            resultType="com.pojo.TUser">
+        select * from ssm.t_user where uid = #{id}
+    </select>
+
+    <!-- 使用if元素动态查询用户信息 -->
+    <select id="selectUserByIf" resultType="com.pojo.TUser" parameterType="com.pojo.TUser">
+        select * from ssm.t_user where 1=1
+        <if test="username!=null and username!=''">
+            and username like concat('%', #{username}, '%')
+        </if>
+        <if test="gender!=null and gender!=''">
+            and gender = #{gender}
+        </if>
+    </select>
+
+    <!-- 使用choose when otherwise元素根据条件动态查询 -->
+    <select id="selectUserByChoose" resultType="com.pojo.TUser" parameterType="com.pojo.TUser">
+        select * from ssm.t_user where 1=1
+        <choose>
+            <when test="username!=null and username!=''">
+                and username like concat('%', #{username}, '%')
+            </when>
+            <when test="gender!=null and gender!=''">
+                and gender = #{gender}
+            </when>
+            <otherwise>
+                and uid > 10
+            </otherwise>
+        </choose>
+    </select>
+
+    <!-- 使用where元素 -->
+    <select id="selectUserByWhere" resultType="com.pojo.TUser" parameterType="com.pojo.TUser">
+        select * from ssm.t_user
+        <where>
+            <choose>
+                <when test="username!=null and username!=''">
+                    and username like concat('%', #{username}, '%')
+                </when>
+                <when test="gender!=null and gender!=''">
+                    and gender = #{gender}
+                </when>
+                <otherwise>
+                    and 5 > uid
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
+    <!-- 使用set元素动态修改一个用户 -->
+    <update id="updateUserBySet" parameterType="com.pojo.TUser">
+        update ssm.t_user
+        <set>
+            <if test="username!=null">
+                username = #{username}
+            </if>
+            <if test="gender!=null">
+                gender = #{gender}
+            </if>
+        </set>
+        where uid  = #{uid}
+    </update>
+
+    <!-- 使用foreach元素 -->
+    <select id="selectUserByForeach" resultType="com.pojo.TUser" parameterType="com.pojo.TUser">
+        select * from ssm.t_user where uid in
+        <foreach item="item" index="index" collection="listId"
+                 open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+    
+    <!-- 使用bind元素模糊查询 -->
+    <select id="selectUserByBind" resultType="com.pojo.TUser" parameterType="com.pojo.TUser">
+        /*bind中的username是com.pojo.TUser中的属性名*/
+        <bind name="param_username" value="'%' + username + '%'"/>
+        select * from ssm.t_user where username like #{param_username}
+    </select>
+
+</mapper>
