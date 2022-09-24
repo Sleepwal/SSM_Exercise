@@ -1,4 +1,4 @@
-package service;
+package com.service;
 import dao.TestDIDao;
 
 public class TestDIServiceImpl implements TestDIService {

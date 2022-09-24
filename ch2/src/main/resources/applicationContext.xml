@@ -8,12 +8,12 @@
 	<bean id="myTestDao" class="dao.TestDIDaoImpl" />
 	
 	<!-- 构造器注入 -->
-	<bean id="testService" class="service.TestDIServiceImpl">
+	<bean id="testService" class="com.service.TestDIServiceImpl">
 		<constructor-arg index="0" ref="myTestDao" />
 	</bean>
 	
 	<!-- setter注入 -->
-	<bean id="testService1" class="service.TestDIServiceImpl">
+	<bean id="testService1" class="com.service.TestDIServiceImpl">
 		<property name="testDIDao" ref="myTestDao"/>
 	</bean>
 

@@ -7,7 +7,7 @@
 
     <!-- 扫描控制类 -->
     <context:component-scan base-package="com.controller"/>
-    <context:component-scan base-package="com.service"/>
+    <context:component-scan base-package="com.com.service"/>
     <!-- 简化开发的配置 -->
 <!--    <mvc:annotation-driven/>-->
 <!--    <mvc:resource location="/html/" mapping="/html/**"/>-->

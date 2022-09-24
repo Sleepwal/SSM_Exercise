@@ -7,12 +7,12 @@
 
     <!-- 扫描控制层 -->
     <context:component-scan base-package="com.controller"/>
-    <context:component-scan base-package="com.service"/>
+    <context:component-scan base-package="com.com.service"/>
     <context:component-scan base-package="com.validator"/>
 
     <!-- 注册格式化转换器 -->
     <bean class="org.springframework.format.support.FormattingConversionServiceFactoryBean" id="conversionService2"/>
-    <mvc:annotation-driven conversion-service="conversionService2"/>
+    <mvc:annotation-driven conversion-com.service="conversionService2"/>
 
     <!-- 配置消息属性文件 -->
     <bean id="messageSource"
