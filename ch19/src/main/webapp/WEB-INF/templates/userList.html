@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>usrList</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th colspan="6">用户列表</th>
+        </tr>
+        <tr>
+            <td>用户id</td>
+            <td>用户姓名</td>
+            <td>年龄</td>
+            <td>性别</td>
+        </tr>
+        <tr th:each="user : ${list}">
+            <td th:text="${user.userId}"></td>
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.balance}"></td>
+            <td>
+                <a href="">删除</a>
+                <a href="">修改</a>
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>
