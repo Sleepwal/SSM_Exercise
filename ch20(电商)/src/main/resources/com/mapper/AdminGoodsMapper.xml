@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mapper.AdminGoodsMapper">
+
+    <!-- 添加商品 -->
+    <insert id="addGoods" parameterType="Goods">
+        insert into shop.goodstable(id, gname, grprice, goprice, gstore, gpicture, goodstype_id)
+        VALUES (null, #{gname},  #{grprice},  #{goprice},  #{gstore},  #{gpicture},  #{goodstypeId})
+    </insert>
+
+    <!-- 修改一个商品 -->
+    <update id="updateGoodsById" parameterType="Goods">
+        update shop.goodstable
+        <set>
+            <if test="gname != null">
+                gname = #{gname},
+            </if>
+            <if test="goprice != null">
+                goprice = #{goprice},
+            </if>
+            <if test="grprice != null">
+                grprice = #{grprice},
+            </if>
+            <if test="gstore != null">
+                gstore = #{gstore},
+            </if>
+            <if test="gpicture != null">
+                gpicture = #{gpicture},
+            </if>
+            <if test="goodstype_id != null">
+                goodstype_id = #{goodstype_id},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+</mapper>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mapper.AdminTypeMapper">
+
+    <!-- adminType/toAddType -->
+    <!-- adminType/toDeleteType -->
+    <select id="selectGoodsType" resultType="GoodsType">
+        select * from shop.goodstype
+    </select>
+    
+    <!-- adminType/addType -->
+    <insert id="addType" parameterType="String">
+        insert into shop.goodstype(id, type_name) values (null, #{typename})
+    </insert>
+
+    <!-- adminType/deleteType -->
+    <delete id="deleteType" parameterType="long">
+        delete from shop.goodstype where id=#{id}
+    </delete>
+    <select id="selectGoodsByType" resultType="Goods" parameterType="long">
+        select * from shop.goodstable where goodstype_id=#{id}
+    </select>
+
+</mapper>
