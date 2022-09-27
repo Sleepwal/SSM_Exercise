@@ -11,6 +11,7 @@ public interface UserMapper {
     public TUser selectUserById(Integer id);
     List<TUser> selectUserByIf(TUser user);
     List<TUser> selectUserByChoose(TUser user);
+    List<TUser> selectUserByTrim(TUser user);
     List<TUser> selectUserByWhere(TUser user);
     int updateUserBySet(TUser user);
     List<TUser> selectUserByForeach(@Param("listId") List<Integer> listId);

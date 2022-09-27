@@ -36,6 +36,19 @@
         </choose>
     </select>
 
+    <!-- 使用trim元素 -->
+    <select id="selectUserByTrim" resultType="com.pojo.TUser" parameterType="com.pojo.TUser">
+        select * from ssm.t_user
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="username!=null and username!=''">
+                and username like concat('%', #{username}, '%')
+            </if>
+            <if test="gender!=null and gender!=''">
+                and gender = #{gender}
+            </if>
+        </trim>
+    </select>
+
     <!-- 使用where元素 -->
     <select id="selectUserByWhere" resultType="com.pojo.TUser" parameterType="com.pojo.TUser">
         select * from ssm.t_user

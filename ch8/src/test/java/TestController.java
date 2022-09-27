@@ -30,6 +30,11 @@ public class TestController {
         userController.testChoose();
         System.out.println("=========\n");
 
+        //trim
+        System.out.println("trim");
+        userController.testTrim();
+        System.out.println("=========\n");
+
         //where
         System.out.println("where");
         userController.testWhere();

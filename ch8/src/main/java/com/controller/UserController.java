@@ -25,17 +25,26 @@ public class UserController {
 
     public void testChoose() {
         TUser user = new TUser();
-        user.setUsername("");
-        user.setGender("");
+        user.setUsername("张");
+        user.setGender("男");
 
         List<TUser> list = userDao.selectUserByChoose(user);
         list.forEach(System.out::println);
     }
 
+    public void testTrim() {
+        TUser user = new TUser();
+        user.setUsername("张");
+        user.setGender("男");
+
+        List<TUser> list = userDao.selectUserByTrim(user);
+        list.forEach(System.out::println);
+    }
+
     public void testWhere() {
         TUser user = new TUser();
-        user.setUsername("");
-        user.setGender("");
+        user.setUsername("S");
+        user.setGender("男");
 
         List<TUser> list = userDao.selectUserByWhere(user);
         list.forEach(System.out::println);
