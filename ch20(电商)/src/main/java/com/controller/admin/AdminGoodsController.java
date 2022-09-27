@@ -56,4 +56,31 @@ public class AdminGoodsController {
         return adminGoodsService.addOrUpdateGoods(goods, request, updateAct);
     }
 
+    /**
+     * @param model:
+     * @param pageCur:
+     * @param act:
+     * @return String
+     * @author SleepWalker
+     * @description 所有商品
+     * @date  23:01
+     */
+    @RequestMapping("/selectGoods")
+    public String selectGoods(Model model, Long pageCur, String act) {
+        return adminGoodsService.selectGoods(model, pageCur, act);
+    }
+
+    /**
+     * @param model:
+     * @param id:
+     * @param act:
+     * @return String
+     * @author SleepWalker
+     * @description 查询一个商品
+     * @date  23:03
+     */
+    @RequestMapping("/selectAGoods")
+    public String selectAGoods(Model model, Long id, String act) {
+        return adminGoodsService.selectAGoods(model, id, act);
+    }
 }

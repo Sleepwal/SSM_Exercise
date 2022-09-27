@@ -5,6 +5,22 @@
 
 <mapper namespace="com.mapper.AdminGoodsMapper">
 
+    <!-- 查询商品 -->
+    <select id="selectGoods" resultType="Goods">
+        select * from shop.goodstable
+    </select>
+
+    <!-- 分页查询商品 -->
+    <select id="selectAllGoodsByPage" resultType="Goods" parameterType="map">
+        select * from shop.goodstable order by id limit #{startIndex}, #{perPageSize}
+    </select>
+
+    <!-- 根据id查询一个商品 -->
+    <select id="selectGoodsById" resultType="Goods" parameterType="long">
+        select gt.*, gy.type_name from shop.goodstable gt, shop.goodstype gy
+        where gt.id = #{id} and gt.goodstype_id = gy.id
+    </select>
+
     <!-- 添加商品 -->
     <insert id="addGoods" parameterType="Goods">
         insert into shop.goodstable(id, gname, grprice, goprice, gstore, gpicture, goodstype_id)

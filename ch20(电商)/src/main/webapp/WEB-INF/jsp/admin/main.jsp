@@ -82,7 +82,7 @@ body {
 }
 
 #content iframe {
-	height: 300px;
+	height: 500px;
 	width: 780px;
 }
 
