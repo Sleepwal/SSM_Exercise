@@ -3,6 +3,7 @@ package com.service.admin;
 import com.mapper.AdminTypeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpSession;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpSession;
  */
 
 @Service
+@Transactional
 public class AdminTypeServiceImpl implements AdminTypeService {
     @Autowired
     AdminTypeMapper adminTypeMapper;

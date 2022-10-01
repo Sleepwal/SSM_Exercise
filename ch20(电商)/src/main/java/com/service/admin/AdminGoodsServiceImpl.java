@@ -2,14 +2,18 @@ package com.service.admin;
 
 import com.github.pagehelper.PageInfo;
 import com.mapper.AdminGoodsMapper;
+import com.mapper.AdminTypeMapper;
 import com.pojo.Goods;
+import com.pojo.GoodsType;
 import com.util.MyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,9 +27,12 @@ import java.util.Map;
  * @version: 1.0
  */
 @Service
+@Transactional
 public class AdminGoodsServiceImpl implements AdminGoodsService {
     @Autowired
     AdminGoodsMapper adminGoodsMapper;
+    @Autowired
+    AdminTypeMapper adminTypeMapper;
 
     /**
      * @param goods:
@@ -150,23 +157,63 @@ public class AdminGoodsServiceImpl implements AdminGoodsService {
     public String selectAGoods(Model model, Long id, String act) {
         Goods agoods = adminGoodsMapper.selectGoodsById(id);
         model.addAttribute("goods", agoods);
-        model.addAttribute("goods", agoods);
 
         if("updateAgoods".equals(act)){
+            model.addAttribute("goodsType", adminTypeMapper.selectGoodsType());
             return "admin/updateAgoods";
         }
 
         return "admin/goodsDetail";
     }
 
+    /**
+     * @param ids:
+     * @param model:
+     * @return String
+     * @author SleepWalker
+     * @description 删除多个商品
+     * @date  11:05
+     */
     @Override
-    public String deleteGoods(long[] ids, Model model) {
-        return null;
+    public String deleteGoods(Long[] ids, Model model) {
+        List<Long> list = new ArrayList<>();
+        for (int i = 0; i < ids.length; i++) {
+            if(adminGoodsMapper.selectCartGoods(ids[i]).size() > 0 ||
+                    adminGoodsMapper.selectFocusGoods(ids[i]).size() > 0 ||
+                    adminGoodsMapper.selectOrderdetailGoods(ids[i]).size() > 0) {
+                model.addAttribute("msg", "商品有关联, 不允许删除!");
+                return "forward:/adminGoods/selectGoods?act=deleteSelect";
+            }
+            list.add(ids[i]);
+        }
+        adminGoodsMapper.deleteGoods(list);
+        model.addAttribute("msg", "成功删除商品!");
+
+        return "forward:/adminGoods/selectGoods?act=deleteSelect";
     }
 
+    /**
+     * @param id:
+     * @param model:
+     * @return String
+     * @author SleepWalker
+     * @description 删除一个商品
+     * @date  11:11
+     */
     @Override
     public String deleteAGoods(long id, Model model) {
-        return null;
+        //商品有关联
+        if(adminGoodsMapper.selectCartGoods(id).size() > 0 ||
+                adminGoodsMapper.selectFocusGoods(id).size() > 0 ||
+                adminGoodsMapper.selectOrderdetailGoods(id).size() > 0) {
+            model.addAttribute("msg", "商品有关联, 不允许删除!");
+            return "forward:/adminGoods/selectGoods?act=deleteSelect";
+        }
+
+        adminGoodsMapper.deleteAGoods(id);
+        model.addAttribute("msg", "成功删除商品!");
+
+        return "forward:/adminGoods/selectGoods?act=deleteSelect";
     }
 
 }

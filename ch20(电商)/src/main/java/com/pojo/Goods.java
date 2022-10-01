@@ -5,7 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class Goods {
 
-  private long id;
+  private Long id;
   private String gname;
   private double grprice;
   private double goprice;
@@ -31,11 +31,11 @@ public class Goods {
     this.typename = typename;
   }
 
-  public long getId() {
+  public Long getId() {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

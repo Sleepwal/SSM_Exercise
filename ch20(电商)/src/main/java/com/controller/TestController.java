@@ -19,11 +19,14 @@ public class TestController {
      * @param auser
      * @return String
      * @author SleepWalker
-     * @description 运行项目后跳转到管理员登录界面
+     * @description 运行项目后跳转到相应界面
      * @date  23:06
      */
     @RequestMapping("/")
-    public String admin(@ModelAttribute Auser auser) {
+    /*public String admin(@ModelAttribute Auser auser) {
         return "admin/login";
+    }*/
+    public String admin() {
+        return "forward:/before";
     }
 }

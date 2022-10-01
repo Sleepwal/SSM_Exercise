@@ -308,9 +308,9 @@ _margin-bottom:15px;
 .location{ padding:8px 0;border-bottom:2px solid #ccc;}
 
 
-   #goodsInfo{_height:1%;width:230px;float:left; }
-   #goodsInfo .imgInfo{width:230px; float:left; margin-right:10px; overflow:hidden;}
-   #goodsInfo .imgInfo .thumb{width:230px; height:230px; display:block;}
+   #goodsInfo{_height:1%;width:500px;float:left; }
+   #goodsInfo .imgInfo{width:500px; float:left; margin-right:10px; overflow:hidden;}
+   #goodsInfo .imgInfo .thumb{width:500px; height:230px; display:block;}
    #goodsInfo span{width:4px; height:48px; background:url(../../images/before/bg.gif) no-repeat 0 -527px; float:left;}
    #goodsInfo span.spanR{width:4px; height:48px; background:url(../../images/before/bg.gif) no-repeat -5px -527px; float:right;}
    #goodsInfo .gallery{width:204px; float:left; margin-left:10px; _margin-left:5px; overflow:hidden;}

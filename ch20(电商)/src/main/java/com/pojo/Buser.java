@@ -7,7 +7,6 @@ public class Buser {
   private String bpwd;
   private String bemail;
 
-
   public long getId() {
     return id;
   }

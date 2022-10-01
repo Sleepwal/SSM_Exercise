@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mapper.OrderMapper">
+
+    <!-- 添加一个订单, 成功后将主键回填给id(pojo类属性) -->
+    <insert id="addOrder" parameterType="Order" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO shop.orderbasetable(busertable_id, amount, status, order_data)
+        VALUES(#{busertable_id}, #{amount}, 0, NOW())
+    </insert>
+
+    <!-- 生成订单详情 -->
+    <insert id="addOrderDetail" parameterType="map">
+        INSERT INTO shop.orderdetail(orderbase_id, goodstable_id, shopping_num)
+        SELECT #{ordersn}, goodstable_id, shopping_num
+        FROM shop.carttable WHERE busertable_id = #{id}
+    </insert>
+
+    <!-- 查询商品购买量, 以便更新库存使用 -->
+    <select id="selectGoodsShop" parameterType="Integer" resultType="map">
+        SELECT shopping_num gshoppingnum, goodstable_id gid
+        FROM shop.carttable WHERE busertable_id = #{uid}
+    </select>
+
+    <!-- 更新商品库存 -->
+    <update id="updateStore" parameterType="map">
+        UPDATE shop.goodstable SET gstore = gstore - #{gshoppingnum}
+        WHERE id = #{gid}
+    </update>
+
+    <!-- 清空购物车 -->
+    <delete id="clear" parameterType="Integer">
+        DELETE FROM shop.carttable WHERE busertable_id = #{uid}
+    </delete>
+
+    <!-- 支付订单 -->
+    <update id="pay" parameterType="Integer">
+        UPDATE shop.orderbasetable SET status = 1 WHERE id = #{ordersn}
+    </update>
+
+</mapper>

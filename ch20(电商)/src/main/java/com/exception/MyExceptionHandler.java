@@ -2,7 +2,6 @@ package com.exception;
 
 import com.pojo.Auser;
 import com.pojo.Buser;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -41,12 +40,12 @@ public class MyExceptionHandler implements org.springframework.web.servlet.Handl
         if(ex instanceof AdminLoginNoException) {
             //登录页面需要auser对象
             request.setAttribute("auser", new Auser());
-            request.setAttribute("msg", "没有登录, 请登录!");
+            request.setAttribute("msg", "您没有登录, 请登录!");
 
             return new ModelAndView("/admin/login", model);
         } else if(ex instanceof UserLoginNoException) {
             request.setAttribute("buser", new Buser());
-            request.setAttribute("msg", "没有登录, 请登录!");
+            request.setAttribute("msg", "你没有登录, 请登录!");
 
             return new ModelAndView("/before/login", model);
         } else {

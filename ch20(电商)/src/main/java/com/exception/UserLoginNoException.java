@@ -9,7 +9,7 @@ package com.exception;
  * @version: 1.0
  */
 public class UserLoginNoException extends Exception {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 2L;
 
     public UserLoginNoException() {
     }

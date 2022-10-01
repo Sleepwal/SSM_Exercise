@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 @RequestMapping("/adminGoods")
-public class AdminGoodsController {
+public class AdminGoodsController extends BaseController {
     @Autowired
     AdminGoodsService adminGoodsService;
     @Autowired
@@ -82,5 +82,31 @@ public class AdminGoodsController {
     @RequestMapping("/selectAGoods")
     public String selectAGoods(Model model, Long id, String act) {
         return adminGoodsService.selectAGoods(model, id, act);
+    }
+
+    /**
+     * @param ids:
+     * @param model:
+      * @return String
+     * @author SleepWalker
+     * @description 删除多个商品
+     * @date  11:50
+     */
+    @RequestMapping("/deleteGoods")
+    public String deleteGoods(Long[] ids, Model model) {
+        return adminGoodsService.deleteGoods(ids, model);
+    }
+
+    /**
+     * @param id:
+     * @param model:
+     * @return String
+     * @author SleepWalker
+     * @description 删除一个商品
+     * @date  11:50
+     */
+    @RequestMapping("/deleteAGoods")
+    public String deleteAGoods(Long id, Model model) {
+        return adminGoodsService.deleteAGoods(id, model);
     }
 }

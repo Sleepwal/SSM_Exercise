@@ -207,7 +207,7 @@ h3{ font-size:16px;}
 
 
 
-  /*Í·²¿µÇÂ¼µ¯³öµÇÂ½*/
+  /*å¤´éƒ¨ç™»å½•å¼¹å‡ºç™»é™†*/
 #alert {border:5px solid #baebf3;width:400px;background:#fff;z-index:10000;position:absolute;display:none;}  
 #alert h4 {color:#333;padding:10px; height:20px; font-size:14px; border-bottom:1px solid #ccc; background:url(../../images/before/bj20.gif) repeat-x 0 top;}  
 #alert h4 span {float:left;}  

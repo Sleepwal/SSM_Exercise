@@ -32,7 +32,7 @@ public class MyUtil {
     }
 
     /**
-     * @param session:
+     * @param session :
      * @return long
      * @author SleepWalker
      * @description 获得前台登录ID

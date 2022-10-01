@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mapper.AdminUserMapper">
+    <!-- 查询所有用户 -->
+    <select id="userInfo" resultType="map">
+        select * from shop.busertable
+    </select>
+
+    <!-- 删除用户 -->
+    <delete id="deleteUser" parameterType="Long">
+        delete from shop.busertable where id = #{id}
+    </delete>
+
+</mapper>
