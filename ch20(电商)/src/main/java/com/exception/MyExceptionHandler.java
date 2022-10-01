@@ -18,21 +18,17 @@ import java.util.Map;
  * @date: 8:56
  * @version: 1.0
  */
-public class MyExceptionHandler implements org.springframework.web.servlet.HandlerExceptionResolver {
+public class MyExceptionHandler {
     /**
      * @param request:
-     * @param response:
-     * @param handler:
      * @param ex:
      * @return ModelAndView
      * @author SleepWalker
-     * @description TODO
+     * @description 处理异常方法
      * @date  12:13
      */
-
     @ExceptionHandler
-    @Override
-    public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
+    public ModelAndView resolveException(HttpServletRequest request, Exception ex) {
         Map<String, Object> model = new HashMap<>();
         model.put("ex", ex);
 

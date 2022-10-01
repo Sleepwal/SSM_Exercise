@@ -1,16 +1,16 @@
 package com.controller.admin;
 
 import com.exception.AdminLoginNoException;
+import com.exception.MyExceptionHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
 @Controller
-public class BaseController {
+public class BaseController extends MyExceptionHandler {
   /**
    * @param session: 
    * @param request: 

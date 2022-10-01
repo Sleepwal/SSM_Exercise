@@ -36,6 +36,6 @@
     </bean>
 
     <!-- 托管给MyExceptionHandler -->
-    <!--<bean class="com.exception.MyExceptionHandler"/>-->
+<!--    <bean class="com.exception.MyExceptionHandler"/>-->
 
 </beans>

@@ -4,7 +4,6 @@ import com.service.before.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
@@ -19,7 +18,7 @@ import javax.servlet.http.HttpSession;
  */
 @RequestMapping("/cart")
 @Controller
-public class CartController extends BaseBeforeController  {
+public class CartController extends BaseBeforeController {
     @Autowired
     private CartService cartService;
 

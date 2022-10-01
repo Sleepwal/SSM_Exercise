@@ -38,6 +38,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</td>
 						<td><span class="xx">|</span><a href="userCenter">用户中心</a><span
 							class="xx">|</span></td>
+
+						<td><span class="xx">|</span><a href="admin">管理员</a><span
+							class="xx">|</span></td>
 						<!-- 没有登录 -->
 						<c:if test="${bruser!= null}">	
 						<td><a href="user/exit">退出</a><span
