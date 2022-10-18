@@ -64,8 +64,8 @@ public class UserController {
     }*/
 
     //1.通过Bean接收参数
-    /*@RequestMapping("/register")
-    public String register(UserForm user, Model model) {
+    @RequestMapping("/register1")
+    public String register1(UserForm user, Model model) {
         if("SleepWalker".equals(user.getUname()) && "123".equals(user.getUpass())) {
             logger.info("成功");
             //登录成功,跳转到login.jsp
@@ -77,11 +77,11 @@ public class UserController {
             //返回register.jsp
             return "register";
         }
-    }*/
+    }
 
     //2.通过形参接收参数
-    /*@RequestMapping("/register")
-    public String register(String uname, String upass, Model model) {
+    @RequestMapping("/register2")
+    public String register2(String uname, String upass, Model model) {
         if("SleepWalker".equals(uname) && "123".equals(upass)) {
             logger.info("成功");
             //登录成功,跳转到login.jsp
@@ -93,11 +93,11 @@ public class UserController {
             //返回register.jsp
             return "register";
         }
-    }*/
+    }
 
     //3.通过HttpServletRequest接收参数
-    /*@RequestMapping("/register")
-    public String register(HttpServletRequest request, Model model) {
+    @RequestMapping("/register3")
+    public String register3(HttpServletRequest request, Model model) {
         String uname = request.getParameter("uname");
         String upass = request.getParameter("upass");
 
@@ -112,12 +112,12 @@ public class UserController {
             //返回register.jsp
             return "register";
         }
-    }*/
+    }
 
     //4.通过@PathVariable接收URL中的请求参数
     //必须加method属性
-   /* @RequestMapping(value = "/register/{uname}/{upass}", method = RequestMethod.GET)
-    public String register(@PathVariable String uname, @PathVariable String upass, Model model) {
+   @RequestMapping(value = "/register4/{uname}/{upass}", method = RequestMethod.GET)
+    public String register4(@PathVariable String uname, @PathVariable String upass, Model model) {
         if("SleepWalker".equals(uname) && "123".equals(upass)) {
             logger.info("成功");
             //登录成功,跳转到login.jsp
@@ -129,11 +129,11 @@ public class UserController {
             //返回register.jsp
             return "register";
         }
-    }*/
+    }
 
     //5.通过@RequestParam接收请求参数
-    /*@RequestMapping("/register")
-    public String register(@RequestParam String uname, @RequestParam String upass, Model model) {
+    @RequestMapping("/register5")
+    public String register5(@RequestParam String uname, @RequestParam String upass, Model model) {
         if ("SleepWalker".equals(uname) && "123".equals(upass)) {
             logger.info("成功");
             //登录成功,跳转到login.jsp
@@ -144,11 +144,11 @@ public class UserController {
             //返回register.jsp
             return "register";
         }
-    }*/
+    }
 
     //6.通过@ModelAttribute接收请求参数
-    /*@RequestMapping("/register")
-    public String register(@ModelAttribute("user") UserForm user) {
+    @RequestMapping("/register6")
+    public String register6(@ModelAttribute("user") UserForm user) {
         if("SleepWalker".equals(user.getUname()) && "123".equals(user.getUpass())) {
             logger.info("成功");
             //登录成功,跳转到login.jsp
@@ -160,6 +160,6 @@ public class UserController {
             //返回register.jsp
             return "register";
         }
-    }*/
+    }
 
 }

@@ -30,21 +30,22 @@ public class IndexServiceImpl implements IndexService {
     /**
      * @param model:
      * @param session:
-     * @param goods:
+     * @param id:
      * @return String
      * @author SleepWalker
      * @description 查询需要数据,到首页
      * @date  23:13
      */
     @Override
-    public String before(Model model, HttpSession session, Goods goods) {
+    public String before(Model model, HttpSession session, Integer id) {
         session.setAttribute("goodsType", adminTypeMapper.selectGoodsType());
         session.setAttribute("salelist", indexMapper.getSaleOrder());
         session.setAttribute("focuslist", indexMapper.getFocusOrder());
         session.setAttribute("noticelist", indexMapper.selectNotice());
 
-        if(goods.getId() == null){
-            goods.setId(0L);
+        Goods goods = new Goods();
+        if(id == null){
+            goods.setGoodstypeId(0L);
         }
 
         model.addAttribute("lastedlist", indexMapper.getLastedGoods(goods));

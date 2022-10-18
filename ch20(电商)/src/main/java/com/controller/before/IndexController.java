@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 
@@ -34,8 +36,8 @@ public class IndexController {
      * @date  23:18
      */
     @RequestMapping("/before")
-    public String before(Model model, HttpSession session, Goods goods){
-        return indexService.before(model, session, goods);
+    public String before(Model model, HttpSession session, Integer id){
+        return indexService.before(model, session, id);
     }
 
     /**

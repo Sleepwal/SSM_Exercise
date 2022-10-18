@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import javax.servlet.http.HttpSession;
 
 public interface IndexService {
-    String before(Model model, HttpSession session, Goods goods);
+    String before(Model model, HttpSession session, Integer id);
     String search(Model model, String mykey);
     String toRegister(Model model);
     String toLogin(Model model);

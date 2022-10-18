@@ -9,6 +9,8 @@
         <setting name="lazyLoadingEnabled" value="true"/>
         <!-- 将积极加载改为按需加载 -->
         <setting name="aggressiveLazyLoading" value="false"/>
+
+        <setting name="logImpl" value="LOG4J"/>
     </settings>
 
     <!--引入映射文件-->
